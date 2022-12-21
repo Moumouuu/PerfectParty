@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit User{% endblock %}
+
+{% block body %}
+    {{ include('default/navigation.html.twig') }}
+
+    <div class="container text-center my-4 col-md-6 col-sm-12" >
+        <div class="card p-3">
+            <fieldset >
+                <legend>Modification de {{ app.user.name }}</legend>
+                {{ include('user/_form.html.twig') }}
+            </fieldset>
+        </div>
+    </div>
+
+
+
+{% endblock %}

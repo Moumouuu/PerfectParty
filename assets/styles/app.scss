@@ -1,5 +1,15 @@
 @import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Acme&family=Playfair+Display&display=swap');
+$blue: #01859A;
 
 body {
-    background-color: lightgray;
+    font-family: 'Acme', sans-serif;
+    background-color: #F2F2F2;
+
+    .title-party, .title-nav{
+        color: $blue;
+    }
+    .navigation{
+        margin-left: -8rem;
+    }
 }

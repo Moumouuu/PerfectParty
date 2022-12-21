@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block body %}
+    {{ include('default/navigation.html.twig') }}
+
+    <div class="container text-center my-4 col-md-6 col-sm-12" >
+        <form class="card p-3">
+            <fieldset disabled>
+                <legend>Profil de {{ app.user.name }}</legend>
+                <div class="mb-3">
+                    <label for="disabledTextInput" class="form-label">Nom complet</label>
+                    <input type="text" id="disabledTextInput" class="form-control" placeholder="{{ app.user.name }}">
+                </div>
+                <div class="mb-3">
+                    <label for="disabledTextInput" class="form-label">E-Mail</label>
+                    <input type="text" id="disabledTextInput" class="form-control" placeholder="{{ app.user.email }}">
+                </div>
+                <div class="mb-3">
+                    <label for="disabledTextInput" class="form-label">Numéro</label>
+                    <input type="text" id="disabledTextInput" class="form-control" placeholder="{{ app.user.phoneNumber }}">
+                </div>
+            </fieldset>
+            <div class="btn-group">
+                <a href="{{ path('home') }}" class="btn btn-primary">Accueil</a>
+                <a href="{{ path('app_user_edit',{'id':app.user.id}) }}" class="btn btn-secondary">Modifier</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}
