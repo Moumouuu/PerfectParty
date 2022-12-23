@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Room;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,7 +18,7 @@ class RoomType extends AbstractType
             ->add('nbChambre')
             ->add('nbLit')
             ->add('nbSalleDeBain')
-            ->add('adresse')
+            ->add('adresse',TextareaType::class)
             ->add('description')
             ->add('price')
         ;

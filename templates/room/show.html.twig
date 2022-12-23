@@ -3,52 +3,74 @@
 {% block title %}Room{% endblock %}
 
 {% block body %}
-    <h1>Room</h1>
+    {{ include('default/navigation.html.twig') }}
+    <div class="container col-md-10 col-sm-12 my-5">
+        <div class="presentation-container">
+            <h1>{{ room.title }}</h1>
+            <div class="d-flex">
+                <div class="d-flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                         class="bi bi-star" viewBox="0 0 16 16">
+                        <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                    </svg>
+                    <p>4.5</p>
+                </div>
+                <p class="mx-2">{{ room.adresse }}</p>
+            </div>
+            <div class="bg-white p-3 rounded-3 shadow">
+                <div class="overflow-scroll d-flex presentation">
+                    <img src="../../assets/uploads/1.jpeg" alt="" class="image-presentation">
+                    <img src="../../assets/uploads/3.jpeg" alt="" class="image-presentation">
+                    <img src="../../assets/uploads/2.jpeg" alt="" class="image-presentation">
+                    <!-- todo findAll pictures from room.id and fetch it-->
+                </div>
+            </div>
+        </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ room.id }}</td>
-            </tr>
-            <tr>
-                <th>NbVoyageurMin</th>
-                <td>{{ room.nbVoyageurMin }}</td>
-            </tr>
-            <tr>
-                <th>NbVoyageurMax</th>
-                <td>{{ room.nbVoyageurMax }}</td>
-            </tr>
-            <tr>
-                <th>NbChambre</th>
-                <td>{{ room.nbChambre }}</td>
-            </tr>
-            <tr>
-                <th>NbLit</th>
-                <td>{{ room.nbLit }}</td>
-            </tr>
-            <tr>
-                <th>NbSalleDeBain</th>
-                <td>{{ room.nbSalleDeBain }}</td>
-            </tr>
-            <tr>
-                <th>Adresse</th>
-                <td>{{ room.adresse }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ room.description }}</td>
-            </tr>
-            <tr>
-                <th>Price</th>
-                <td>{{ room.price }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <div class="main-container d-flex justify-content-between row">
+            <div class="about-container d-flex flex-column bg-white shadow p-4 my-4 rounded-3 col-md-6 col-sm-12">
+                <h3>{{ room.title }}</h3>
+                <p>{{ room.nbVoyageurMax }} personnes - {{ room.nbLit }} lits - {{ room.nbChambre }} chambres
+                    - {{ room.nbSalleDeBain }} salle de bains</p>
+                <p>Adresse : {{ room.adresse }}</p>
+                <p>Description : <br>{{ room.description }}</p>
+            </div>
+            <div class="col-md-5 col-sm-12">
+                <div class="price-container d-flex flex-column bg-white shadow rounded-3 p-4 my-4">
+                    <div class="d-flex justify-content-between">
+                        <h3>{{ room.price }}€ par nuit</h3>
+                        <div class="d-flex">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                 class="bi bi-star" viewBox="0 0 16 16">
+                                <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                            </svg>
+                            <p>4.5</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h5>Options disponibles :</h5>
+                        <ul>
+                            {% for extra in room.extras %}
+                                <li class="d-flex justify-content-between">- {{ extra.name }}
+                                    <span>{{ extra.price }}€ </span></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <a href="{{ path('app_reservation_new',{'id':room.id}) }}" class="btn btn-primary">Réserver</a>
+                </div>
+            </div>
+        </div>
 
-    <a href="{{ path('app_room_index') }}">back to list</a>
+        <div class="map">
+            <iframe src="{{ room.map }}" width="100%" height="450" style="border:10px;" allowfullscreen="yes"
+                    loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
 
+
+
+    <!-- Only for admin
     <a href="{{ path('app_room_edit', {'id': room.id}) }}">edit</a>
-
     {{ include('room/_delete_form.html.twig') }}
+-->
 {% endblock %}
