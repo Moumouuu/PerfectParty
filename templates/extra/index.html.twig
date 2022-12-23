@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Extra index{% endblock %}
+
+{% block body %}
+    <h1>Extra index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Price</th>
+                <th>Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for extra in extras %}
+            <tr>
+                <td>{{ extra.id }}</td>
+                <td>{{ extra.price }}</td>
+                <td>{{ extra.name }}</td>
+                <td>
+                    <a href="{{ path('app_extra_show', {'id': extra.id}) }}">show</a>
+                    <a href="{{ path('app_extra_edit', {'id': extra.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_extra_new') }}">Create new</a>
+{% endblock %}

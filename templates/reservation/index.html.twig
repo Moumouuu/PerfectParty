@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservation index{% endblock %}
+
+{% block body %}
+
+    {{ include('default/navigation.html.twig') }}
+
+    <div class="container col-md-11 col-sm-12 my-5 text-center">
+        <h1>Toutes mes réservations</h1>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Adresse</th>
+                <th>DateStart</th>
+                <th>DateEnd</th>
+                <th>TotalPrice</th>
+                <th>nbPeople</th>
+                <th>Extras</th>
+                <th>Room</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for reservation in reservations %}
+                {% if reservation.user == app.user %}
+                    <tr>
+                        <td>{{ reservation.room.title }}</td>
+                        <td>{{ reservation.room.adresse }}</td>
+                        <td>{{ reservation.dateStart ? reservation.dateStart|date('Y-m-d') : '' }}</td>
+                        <td>{{ reservation.dateEnd ? reservation.dateEnd|date('Y-m-d') : '' }}</td>
+                        <td>{{ reservation.totalPrice }}</td>
+                        <td>{{ reservation.nbPeople }}</td>
+                        <td>
+                            {% for extra in reservation.extras %}
+                                {{ extra.name }}
+                            {% endfor %}
+                        </td>
+                        <td><a href="{{ path('app_room_show',{'id':reservation.room.id}) }}">See page</a></td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

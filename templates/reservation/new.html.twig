@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Reservation{% endblock %}
+
+{% block body %}
+{{ include('default/navigation.html.twig') }}
+    <div class="container col-md-6 my-5 card p-3 text-center">
+        <h1>Réservation</h1>
+        {{ include('reservation/_form.html.twig') }}
+
+    </div>
+
+{% endblock %}
