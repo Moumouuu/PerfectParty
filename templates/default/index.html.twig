@@ -10,7 +10,7 @@
             {% for room in rooms %}
                 <a href="{{ path('app_room_show',{'id':room.id}) }}" class="text-decoration-none text-black">
                     <div class="card" style="width: 18rem;">
-                        <img src="../../assets/logo/logo_PerfectParty.png" class="card-img-top"
+                        <img src="../../assets/uploads/{{ room.pictures[0] }}" class="card-img-top"
                              alt="picture of room: {{ room.id }}">
                         <div class="card-body d-flex justify-content-between">
                             <div class="body-left">

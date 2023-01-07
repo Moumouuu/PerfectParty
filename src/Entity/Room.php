@@ -51,10 +51,14 @@ class Room
     #[ORM\OneToMany(mappedBy: 'room', targetEntity: Extra::class)]
     private Collection $extras;
 
+    #[ORM\OneToMany(mappedBy: 'room',targetEntity: Pictures::class,  cascade: ['persist'])]
+    private Collection $pictures;
+
     public function __construct()
     {
         $this->reservations = new ArrayCollection();
         $this->extras = new ArrayCollection();
+        $this->pictures = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -246,11 +250,49 @@ class Room
         return $this->title;
     }
 
-    public function getTotalPrice():int{
-        $price = $this->getPrice();
-        foreach ($this->extras as $extra){
-            $price += $extra->getPrice();
+
+    public function checkDisponibility(Reservation $r):bool{
+        foreach ($this->getReservations() as $reservation){
+            //if our date start is between the start and the end of another reservation
+
+            if(($r->getDateStart() <= $reservation->getDateEnd() && $r->getDateStart() >= $reservation->getDateStart())
+                || ($r->getDateEnd() <= $reservation->getDateEnd() && $r->getDateEnd() >= $reservation->getDateStart())){
+                //todo verif si toutes la durée du séjour est dispo ->
+                // peut être que le début est dispo et la fin aussi mais pendant ?
+                return false;
+            }
         }
-        return $price;
+        return true;
     }
+
+    /**
+     * @return Collection<int, Pictures>
+     */
+    public function getPictures(): Collection
+    {
+        return $this->pictures;
+    }
+
+    public function addPicture(Pictures $picture): self
+    {
+        if (!$this->pictures->contains($picture)) {
+            $this->pictures->add($picture);
+            $picture->setRoom($this);
+        }
+
+        return $this;
+    }
+
+    public function removePicture(Pictures $picture): self
+    {
+        if ($this->pictures->removeElement($picture)) {
+            // set the owning side to null (unless already changed)
+            if ($picture->getRoom() === $this) {
+                $picture->setRoom(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

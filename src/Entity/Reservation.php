@@ -144,4 +144,35 @@ class Reservation
         return $this;
     }
 
+    /** Allow to calculate the total price of the reservation with the extras selected
+     * @return int : The total cost of the reservation with the extras
+     */
+    public function setTotalPriceWithExtras():int{
+        $totalPrice = $this->getRoom()->getPrice();
+        foreach ($this->getExtras() as $extra){
+            $totalPrice += $extra->getPrice();
+        }
+        return $totalPrice;
+    }
+
+    /**
+     * @param int $p : the number of people the client want
+     * @return bool : True if the number choising is between min and max of the room
+     */
+    public function verifyNbPeople(int $p):bool{
+        if($p< $this->getRoom()->getNbVoyageurMax() && $p>$this->getRoom()->getNbVoyageurMin()){
+            return true;
+        }
+        return false;
+    }
+
+    public function verifyDate():bool{
+        //verify if the start date if between the end date
+        if($this->getDateStart()< $this->getDateEnd()){
+            return true;
+        }
+        return false;
+    }
+
+
 }

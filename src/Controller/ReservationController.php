@@ -36,15 +36,26 @@ class ReservationController extends AbstractController
             ->getRepository(Room::class)
             ->findOneBy(['id' => $id]);
 
+        //set une room
         $reservation->setRoom($room);
-        $reservation->setTotalPrice($room->getTotalPrice());
+
 
         $form = $this->createForm(ReservationType::class, $reservation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $reservationRepository->save($reservation, true);
-            return $this->redirectToRoute('home', [], Response::HTTP_SEE_OTHER);
+            //calcul les prix des extras et le set
+            $reservation->setTotalPrice($reservation->setTotalPriceWithExtras());
+
+            if($reservation->verifyNbPeople($reservation->getNbPeople())
+                && $reservation->verifyDate()
+                && $room->checkDisponibility($reservation) ){
+                $reservationRepository->save($reservation, true);
+                return $this->redirectToRoute('home', [], Response::HTTP_SEE_OTHER);
+            }else{
+                return $this->redirectToRoute('error', [], Response::HTTP_SEE_OTHER);
+            }
+
         }
 
         return $this->renderForm('reservation/new.html.twig', [

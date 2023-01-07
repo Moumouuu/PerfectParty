@@ -26,4 +26,12 @@ class DefaultController extends AbstractController
             /*'pictures'=>$pictures*/
         ]);
     }
+
+    #[Route('/error', name: 'error')]
+    public function error(): Response
+    {
+
+        return $this->render('default/error.html.twig', [
+        ]);
+    }
 }
