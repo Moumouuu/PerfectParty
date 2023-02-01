@@ -6,9 +6,9 @@
     {% include 'default/navigation.html.twig' %}
 
     <div class="container col-md-8 col-sm-12 my-5">
-        <div class="cards row">
+        <div class="cards row d-flex justify-content-center">
             {% for room in rooms %}
-                <a href="{{ path('app_room_show',{'id':room.id}) }}" class="text-decoration-none text-black">
+                <a href="{{ path('app_room_show',{'id':room.id}) }}" class="text-decoration-none text-black col-md-4 m-3">
                     <div class="card" style="width: 18rem;">
                         <img src="../../assets/uploads/{{ room.pictures[0] }}" class="card-img-top"
                              alt="picture of room: {{ room.id }}">
