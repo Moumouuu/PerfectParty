@@ -5,13 +5,18 @@
 {% block body %}
     {% include 'default/navigation.html.twig' %}
 
-    <div class="container col-md-8 col-sm-12 my-5">
+    <div class="container my-5">
         <div class="cards row d-flex justify-content-center">
             {% for room in rooms %}
                 <a href="{{ path('app_room_show',{'id':room.id}) }}" class="text-decoration-none text-black col-md-4 m-3">
-                    <div class="card" style="width: 18rem;">
-                        <img src="../../assets/uploads/{{ room.pictures[0] }}" class="card-img-top"
-                             alt="picture of room: {{ room.id }}">
+                    <div class="card" >
+                        {% if room.pictures | length > 0 %}
+                            <img src="../../assets/uploads/{{ room.pictures[0] }}" class="card-img-top"
+                                 alt="picture of room: {{ room.id }}">
+                            {% else %}
+                                <img src="../../assets/logo/noPic.png" class="card-img-top"
+                                     alt="no picture">
+                        {% endif %}
                         <div class="card-body d-flex justify-content-between">
                             <div class="body-left">
                                 <p class="blue-content h5 m-0">France</p>

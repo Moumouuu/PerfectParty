@@ -19,10 +19,17 @@
             </div>
             <div class="bg-white p-3 rounded-3 shadow">
                 <div class="overflow-scroll d-flex presentation">
-                    <img src="../../assets/uploads/1.jpeg" alt="" class="image-presentation">
-                    <img src="../../assets/uploads/3.jpeg" alt="" class="image-presentation">
-                    <img src="../../assets/uploads/2.jpeg" alt="" class="image-presentation">
-                    <!-- todo findAll pictures from room.id and fetch it-->
+                    {% if room.pictures | length >0 %}
+                        {% for image in room.pictures %}
+                            <img src="../../assets/uploads/{{ image }}"
+                                 alt="image de presentation de la salle {{ room }}" class="image-presentation">
+                        {% endfor %}
+                    {% else %}
+                        <img src="../../assets/logo/noPic.png" alt="image de presentation de la salle {{ room }}"
+                             class="image-presentation">
+                    {% endif %}
+
+
                 </div>
             </div>
         </div>

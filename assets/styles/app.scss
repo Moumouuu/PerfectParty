@@ -10,9 +10,12 @@ body {
         color: $blue;
 
     }
-    .navigation{
-        margin-left: -8rem;
+    #reservation div{
+        display: flex;
+        flex-direction: column;
+
     }
+
     .presentation{
         height: 40vh;
     }
@@ -21,5 +24,14 @@ body {
         width: auto;
         object-fit: cover;
 
+    }
+    .card img{
+        height: 15rem;
+        object-fit: cover;
+    }
+}
+@media only screen and (max-width: 600px){
+    .title-text{
+        display: none;
     }
 }

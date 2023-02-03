@@ -106,6 +106,6 @@ class Extra
     }
 
     public function __toString():string{
-        return $this->name;
+        return "{$this->name} {$this->getPrice()} €" ;
     }
 }

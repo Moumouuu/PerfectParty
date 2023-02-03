@@ -1,18 +1,21 @@
 <nav class="navbar bg-light shadow ">
-    <div class="container-fluid d-flex mx-5">
-        <a class="navbar-brand d-flex align-items-center" href="{{ path('home') }} ">
-            <img src="../../assets/logo/logo_PerfectParty.png" alt="Logo" width="60">
-            <h4>Perfect <h4 class="title-party">Party</h4></h4>
-        </a>
-        <div class="nav h5 navigation">
-            <a href="{{ path('home') }}" class="nav-link title-nav">Accueil</a>
-            <a href="{{ path('home') }}" class="nav-link title-nav">A Propos</a>
+    <div class="container-fluid d-flex justify-content-between mx-md-5">
+        <div class="d-flex align-items-center justify-content-between ">
+            <a class="navbar-brand d-flex align-items-center" href="{{ path('home') }} ">
+                <img src="../../assets/logo/logo_PerfectParty.png" alt="Logo" width="60">
+                <h4 class="title-text">Perfect <span class="title-party">Party</span></h4>
+            </a>
+            <div class="nav h4">
+                <a href="{{ path('home') }}" class="nav-link title-nav p-0 mx-2">Accueil</a>
+                <a href="{{ path('home') }}" class="nav-link title-nav p-0 mx-2">A Propos</a>
+            </div>
         </div>
         <div class="profile">
             <li class="nav-item dropdown list-unstyled">
                 <ul class="dropdown-menu">
                     {% if app.user %}
-                        <li><a class="dropdown-item" href="{{ path('app_user_show',{'id':app.user.id}) }}">Profil</a></li>
+                        <li><a class="dropdown-item" href="{{ path('app_user_show',{'id':app.user.id}) }}">Profil</a>
+                        </li>
                         <li><a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a></li>
                         <li><a class="dropdown-item" href="{{ path('app_reservation_index') }}">Réservations</a></li>
                     {% else %}

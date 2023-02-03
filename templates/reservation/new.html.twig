@@ -4,8 +4,8 @@
 
 {% block body %}
 {{ include('default/navigation.html.twig') }}
-    <div class="container col-md-6 my-5 card p-3 text-center">
-        <h1>Réservation</h1>
+    <div class="container col-md-6 my-5 card p-5 text-center">
+        <h1>Réservation pour {{ reservation.room }} <span>({{ reservation.room.price }}€ / nuit)</span></h1>
         {{ include('reservation/_form.html.twig') }}
 
     </div>
